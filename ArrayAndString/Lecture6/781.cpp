@@ -10,7 +10,9 @@ public:
             cnt[answers[i]]++;
         }
         //5 --> 7
-        for(auto &[a,b] : cnt){
+        for(auto x : cnt){
+            int a = x.first;
+            int b = x.second;
             if(b%(a+1) == 0)
                 ans += b;
             else
