@@ -46,5 +46,23 @@ public:
          * and stop the loop when length of the window becomes k and after that return that window.
          */
         return ans;
+
+
+
+        /**
+         * Another way
+        */
+        int n = arr.size();
+        int s = 0;
+        int e = n-k;
+        while(s < e){
+            int mid = (s+e)/2;
+            if(x-arr[mid] > arr[mid+k]-x){
+                s = mid+1;
+            }else{
+                e = mid;
+            }
+        }
+        return vector<int>(arr.begin()+s,arr.begin()+s+k);
     }
 };
