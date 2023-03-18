@@ -12,7 +12,6 @@
 #pragma GCC optimization ("O3")
 #pragma GCC optimization ("unroll-loops")
 using namespace std;
-#define int long long
 #define all(x) x.begin(),x.end()
 #define pi pair<int,int>
 #define ff first
@@ -59,9 +58,9 @@ bool isPrime(int n){if(n==2||n==3)return true;if(n==1||n%2==0||n%3==0)return fal
         3. remove an vertex from the graph.
         4. hasPath function.
         5. FinalAllPaths or tatal paths.
-        6. preorder of the graph
-        7. 
-        8.
+        6. preorder and postorder of the graph
+        7. find the heavy path btw source and destination.
+        8. 
 */
 
 
@@ -160,9 +159,94 @@ class Graph{
       * haspath 
      */
 
+    /**
+     * dfs call
+     * 
+     * mark it as visited
+     * call on all the unvisited child nodes
+     * unmark as unvisited only if needed -- like in case all the paths we need to unmark it.
+     * 
+    */
+
     bool hasPath(int u,int v){
-        
+        vector<bool> visited(graph.size(),false);
+        function<bool(int,int)> helper = [&](int u,int v){
+            if(u == v) return true;
+            visited[u] = true;
+            for(auto child : graph[u]){
+                if(!visited[child.v]){
+                    auto ans = helper(child.v,v);
+                    if(ans) return ans;
+                }
+            }
+            return false;
+        };
+        return helper(u,v);
     }
+
+    /**
+     * generate all the paths and also return the count
+    */
+
+    int allPaths(int u,int v){
+        vector<bool> visited(graph.size(),false);
+        function<int(int,int,string)> helper = [&](int u,int v,string psf){
+            if(u == v) {
+                cout<<psf+to_string(u)<<"\n";return 1;
+            }
+            visited[u] = true;
+            //go to all the unvisited vertices.
+            int count = 0;
+            for(auto child : graph[u]){
+                if(!visited[child.v]){
+                    count += helper(child.v,v,psf+to_string(u));
+                }
+            }
+            visited[u] = false;
+            return count;
+        };
+        return helper(u,v,"");
+    }
+
+    /**
+     * preorder of the graph
+    */
+
+    void preorder(int src){
+        vector<int> visited(graph.size(),false);
+        function<void(int,string,int)> helper = [&](int src,string psf,int wsf){
+            //print the root
+            cout<<src<<" -> "<<psf+to_string(src)<<" @ "<<wsf<<"\n";
+            visited[src] = true;
+            //print all the childs
+            for(auto child : graph[src]){
+                if(!visited[child.v])
+                    helper(child.v,psf+to_string(src),wsf+child.w);
+            }
+            visited[src] = false;
+        };
+        helper(src,"",0);
+    }
+
+    /**
+     * find the heavy path
+    */
+   int heavyPath(int u,int v){
+    vector<bool> visited(graph.size(),false);
+    function<int(int,int,int)> helper = [&](int u,int v,int wsf){
+        if(u == v) return wsf;
+        visited[u] = true;
+        int ans = -1;
+        for(auto child : graph[u]){
+            if(!visited[child.v]){
+                ans = max(ans,helper(child.v,v,wsf+child.w));
+            }
+        }
+        visited[u] = false;
+        return ans;
+    };
+    return helper(u,v,0);
+   }
 };
 
 void solve(){
@@ -183,6 +267,11 @@ void solve(){
    g.addEdge(4,6,8); 
    g.printGraph();
 
+   cout<<"path btw 0 and 6 : "<<g.hasPath(0,6)<<"\n";
+   cout<<"and all the paths are : \n";
+   g.allPaths(0,6);
+   cout<<"preorder of the graph \n";
+   g.preorder(0);
 }
 
 signed main()
