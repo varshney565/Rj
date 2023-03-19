@@ -60,7 +60,8 @@ bool isPrime(int n){if(n==2||n==3)return true;if(n==1||n%2==0||n%3==0)return fal
         5. FinalAllPaths or tatal paths.
         6. preorder and postorder of the graph
         7. find the heavy path btw source and destination.
-        8. 
+        8. Hamiltonian path.
+        9. Hamiltonian cycle.
 */
 
 
@@ -186,6 +187,25 @@ class Graph{
 
     /**
      * generate all the paths and also return the count
+     * 
+     * in the wrost case complexity will be (V+E)*V!
+     * 
+     * in the wrost case graph will have V-1 edges.
+     * and complexity of one dfs is O(V+E)
+     * so overall complexity will be O(V+E)*total number of possible paths in wrost case
+     * 
+     * so total number of possible paths in wrost case = 
+     * 
+     * V*(V-1)*(V-2)*.......*1 = V!
+     * 
+     * total choices for first vertex = V
+     * total choices for second vertex = V-1
+     * total choices for third vertex = V-2
+     * .....
+     * .....
+     * 
+     * 
+     * 
     */
 
     int allPaths(int u,int v){
@@ -247,6 +267,50 @@ class Graph{
     };
     return helper(u,v,0);
    }
+
+   /**
+    * check whether their exixsts any edge between u and v
+   */
+   int isEdge(int u,int v){
+    int i = 0;
+    for(auto child : graph[u]){
+        if(child.v == v){
+            return i;
+        }
+        i++;
+    }
+    return -1;
+   }
+
+   void hamilton(int u){
+    //print all the hamilton path and hamilton cycle.
+    vector<bool> visited(graph.size(),false);
+
+    function<void(int,int,string)> helper = [&](int src,int count,string psf){
+        //base case
+        
+        if(count == graph.size()){
+            cout<<psf+to_string(src);
+            //check whether it is hamilton cycle or path.
+            //means check whether there exists path btw src and u.
+            if(isEdge(src,u) >= 0){
+                cout<<"*";
+            }
+            cout<<"\n";
+            return;
+        }
+
+        visited[src] = true;
+        //dfs call
+        for(auto child : graph[src]){
+            if(!visited[child.v]){
+                helper(child.v,count+1,psf+to_string(src));
+            }
+        }
+        visited[src] = false;
+    };
+    helper(u,1,"");
+   }
 };
 
 void solve(){
@@ -264,7 +328,8 @@ void solve(){
    g.addEdge(3,4,2);
    g.addEdge(4,5,2);
    g.addEdge(5,6,3);
-   g.addEdge(4,6,8); 
+   g.addEdge(4,6,8);
+   g.addEdge(8,6,12);
    g.printGraph();
 
    cout<<"path btw 0 and 6 : "<<g.hasPath(0,6)<<"\n";
@@ -272,6 +337,8 @@ void solve(){
    g.allPaths(0,6);
    cout<<"preorder of the graph \n";
    g.preorder(0);
+   cout<<"Hamilton Path and cycle: \n";
+   g.hamilton(8);
 }
 
 signed main()
