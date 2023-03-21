@@ -311,6 +311,8 @@ class Graph{
     };
     helper(u,1,"");
    }
+
+   int gcc();
 };
 
 void solve(){
