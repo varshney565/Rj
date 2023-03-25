@@ -313,12 +313,13 @@ class Graph{
    int gcc();
    void bfs(int src);
    void bfs2(int src);//fast because it does't care about cycle
+   bool bipartitie();
 };
 
 #include"bfs.cpp"
 #include"bfs2.cpp"
 #include"gcc.cpp"
-
+#include"bipartitie.cpp"
 
 void solve(){
    Graph g(9);
@@ -348,6 +349,8 @@ void solve(){
    g.hamilton(8);
    cout<<"BFS : \n";
    g.bfs2(0);
+   cout<<"bipartitie : ";
+   cout<<g.bipartitie()<<"\n";
 }
 
 signed main()
