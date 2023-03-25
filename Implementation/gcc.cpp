@@ -1,5 +1,3 @@
-#include"graph.cpp"
-
 int Graph::gcc(){
     int n = graph.size();
     vector<bool> visited(n,false);

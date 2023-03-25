@@ -63,8 +63,6 @@ bool isPrime(int n){if(n==2||n==3)return true;if(n==1||n%2==0||n%3==0)return fal
         8. Hamiltonian path.
         9. Hamiltonian cycle.
 */
-
-
 class Graph{
 
     class Edge{
@@ -314,7 +312,13 @@ class Graph{
 
    int gcc();
    void bfs(int src);
+   void bfs2(int src);//fast because it does't care about cycle
 };
+
+#include"bfs.cpp"
+#include"bfs2.cpp"
+#include"gcc.cpp"
+
 
 void solve(){
    Graph g(9);
@@ -342,6 +346,8 @@ void solve(){
    g.preorder(0);
    cout<<"Hamilton Path and cycle: \n";
    g.hamilton(8);
+   cout<<"BFS : \n";
+   g.bfs2(0);
 }
 
 signed main()
