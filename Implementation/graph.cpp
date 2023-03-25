@@ -313,6 +313,7 @@ class Graph{
    }
 
    int gcc();
+   void bfs(int src);
 };
 
 void solve(){
