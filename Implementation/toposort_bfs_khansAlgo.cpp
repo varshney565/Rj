@@ -8,9 +8,11 @@ void Graph::toposort_khan(){
 		for(int j = 0 ; j < graph[i].size() ; j++){
 			auto child = graph[i][j];
 			indeg[child.v]++;
-			if(indeg[child.v] == 0){
-				PendingNodes.push(child.v);
-			}
+		}
+	}
+	for(int i = 0 ; i < n ; i++){
+		if(indeg[i] == 0){
+			PendingNodes.push(i);
 		}
 	}
 	//apply bfs
