@@ -131,3 +131,13 @@ vector<string> split(const string &str) {
 
     return tokens;
 }
+
+/**OR
+ * 
+ * size of components
+ * a b c d e f
+ * 
+ * ans = a*(b+c+d+e+f)+b*(c+d+e+f)+c*(d+e+f)+d*(e+f)+e*f+f*(0)
+ * 
+ * 
+ * */
