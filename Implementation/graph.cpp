@@ -314,12 +314,16 @@ class Graph{
    void bfs(int src);
    void bfs2(int src);//fast because it does't care about cycle
    bool bipartitie();
+   void toposort();
+   void toposort_khan();
 };
 
 #include"bfs.cpp"
 #include"bfs2.cpp"
 #include"gcc.cpp"
 #include"bipartitie.cpp"
+#include"toposort_dfs.cpp"
+#include"toposort_bfs_khansAlgo.cpp"
 
 void solve(){
    Graph g(9);
@@ -351,6 +355,8 @@ void solve(){
    g.bfs2(0);
    cout<<"bipartitie : ";
    cout<<g.bipartitie()<<"\n";
+   cout<<"Toposort : \n";
+   g.toposort_khan();
 }
 
 signed main()
