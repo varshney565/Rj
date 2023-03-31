@@ -3,7 +3,7 @@ class Dsu{
     vector<int> p;
     Dsu(int n){
         p.resize(n);
-        iota(all(p),0);
+        iota(p.begin(),p.end(),0);
     }
 
     int get(int n){
