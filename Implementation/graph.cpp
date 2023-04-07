@@ -318,7 +318,7 @@ class Graph{
    void toposort_khan();
    void dijkstra1(int src);
    void dijkstra2(int src);
-   void prism();
+   void prism(int src);
 };
 
 #include"bfs.cpp"
