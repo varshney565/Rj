@@ -316,6 +316,9 @@ class Graph{
    bool bipartitie();
    void toposort();
    void toposort_khan();
+   void dijkstra1(int src);
+   void dijkstra2(int src);
+   void prism();
 };
 
 #include"bfs.cpp"
@@ -324,6 +327,8 @@ class Graph{
 #include"bipartitie.cpp"
 #include"toposort_dfs.cpp"
 #include"toposort_bfs_khansAlgo.cpp"
+#include"Dijkstra.cpp"
+#include"prism.cpp"
 
 void solve(){
    Graph g(9);

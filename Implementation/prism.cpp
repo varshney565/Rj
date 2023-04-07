@@ -1,0 +1,5 @@
+class Dj{
+	int distance(){
+		
+	}
+}
