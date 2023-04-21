@@ -34,7 +34,8 @@ public:
         while(!PS.empty()){
             auto front = *PS.begin();
             PS.erase(front);
-            
+            if(visited[front.x][front.y]) continue;
+
             if(front.x == hole[0] && front.y == hole[1]){
                 return front.path;
             }
