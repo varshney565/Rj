@@ -51,7 +51,7 @@ public:
                     if(x == hole[0] && y == hole[1]) break;
                 }
                 if(!visited[x][y]){
-                    PS.insert(_pair(x,y,abs(front.x-x)+abs(front.y-y),front.path+path[i]));
+                    PS.insert(_pair(x,y,front.d+abs(front.x-x)+abs(front.y-y),front.path+path[i]));
                 }
             }
         }
