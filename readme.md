@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-###Follow the NoteBook For Questions for answers using vs code
-=======
 1 @
 2 @
 3 @
@@ -12,5 +9,4 @@
 9 @
 10 @
 11 @
-12
->>>>>>> graph
+12 @
