@@ -2,7 +2,7 @@ void Graph::BellManFord(vector<vector<int>> Edges,int src){
 	int n = graph.size();
 	vector<int> d(n,INT_MAX);
     d[src] = 0;
-    for(int i = 1 ; i <= k ; i++){
+    for(int i = 1 ; i <= n ; i++){
         vector<int> x = d;
         bool update = false;
         for(int j = 0 ; j < Edges.size() ; j++){
